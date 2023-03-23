@@ -41,6 +41,7 @@ public class Main {
 		
 		System.out.println("Duration of fast algorithm: " + fastDur);
 		System.out.println("Duration of slow algorithm: " + slowDur);
+		System.out.printf("The slow algorithm took %d times longer than the fast implementation", Math.floorDiv(slowDur, fastDur));
 		
 	}
 	
