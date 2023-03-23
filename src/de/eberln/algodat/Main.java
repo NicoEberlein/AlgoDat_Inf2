@@ -16,12 +16,12 @@ public class Main {
 		int size = 1*100000;
 		int boundary = 10;
 		
-		ILittleDistanceFinder<Integer> fastFinder = new FastLittleDistanceFinderImpl<>();
-		ILittleDistanceFinder<Integer> slowFinder = new SlowLittleDistanceFinderImpl<>();
+		ILittleDistanceFinder<Double> fastFinder = new FastLittleDistanceFinderImpl<>();
+		ILittleDistanceFinder<Double> slowFinder = new SlowLittleDistanceFinderImpl<>();
 		
 		Random r = new Random();
 		
-		List<Point<Integer>> points = new ArrayList<>();
+		List<Point<Double>> points = new ArrayList<>();
 		
 		for(int i = 0; i<size; i++) {
 			points.add(new Point<Double>(r.nextDouble(boundary*(-1), boundary+1), r.nextDouble(boundary*(-1), boundary+1)));
@@ -29,19 +29,19 @@ public class Main {
 		
 		System.out.println("Fast:");
 		long fastMil = System.currentTimeMillis();
-		List<Point<Integer>> f = fastFinder.findNearestPair(points);
+		List<Point<Double>> f = fastFinder.findNearestPair(points);
 		long fastDur = System.currentTimeMillis() - fastMil;
 		System.out.println(f);
 		
 
 		System.out.println("Slow:");
 		long slowMil = System.currentTimeMillis();
-		List<Point<Integer>> s = slowFinder.findNearestPair(points);
+		List<Point<Double>> s = slowFinder.findNearestPair(points);
 		long slowDur = System.currentTimeMillis() - slowMil;
 		System.out.println(s);
 
 		
-		System.out.println("Duration of fast algorithm: " + fastDur);
+		System.out.printf("Algorithm took %.0f seconds to find the two closest points", fastDur/1000.0);
 		System.out.println("Duration of slow algorithm: " + slowDur);
 		System.out.printf("The slow algorithm took %d times longer than the fast implementation", Math.floorDiv(slowDur, fastDur));
 		
