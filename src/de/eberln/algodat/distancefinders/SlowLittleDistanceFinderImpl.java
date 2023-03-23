@@ -1,34 +1,36 @@
 package de.eberln.algodat.distancefinders;
 
-public class SlowLittleDistanceFinderImpl implements ILittleDistanceFinder{
+import java.util.ArrayList;
+import java.util.List;
+
+public class SlowLittleDistanceFinderImpl<T extends Number> implements ILittleDistanceFinder<T>{
 	
 	@Override
-	public Point[] findNearestPair(Point[] points) {
+	public List<Point<T>> findNearestPair(List<Point<T>> points) {
 		
-		Point[] currentLowestDistancePoints = new Point[2];
+		List<Point<T>> currentLowestDistancePoints = new ArrayList<>();
 		double currentLowestDistance = Double.MAX_VALUE;
 		
-		for(int i = 0; i<points.length; i++) {
+		for(int i = 0; i<points.size(); i++) {
 			
-			for(int j = 0; j<points.length; j++) {
+			for(int j = 0; j<points.size(); j++) {
 				
-				double currentDistance = findDistance(points[i], points[j]);
+				double currentDistance = points.get(i).getDistance(points.get(j));
 				if(currentDistance > 0 && currentDistance < currentLowestDistance) {
 					currentLowestDistance = currentDistance;
-					currentLowestDistancePoints[0] = points[i];
-					currentLowestDistancePoints[1] = points[j];
+					
+					try {
+						currentLowestDistancePoints.set(0, points.get(i));
+						currentLowestDistancePoints.set(1, points.get(j));
+					}catch(IndexOutOfBoundsException e) {
+						currentLowestDistancePoints.add(0, points.get(i));
+						currentLowestDistancePoints.add(1, points.get(j));
+					}
 				}
-				
 			}
 		}
 		
 		return currentLowestDistancePoints;
-		
-	}
-	
-	private double findDistance(Point a, Point b) {
-		
-		return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
 		
 	}
 	

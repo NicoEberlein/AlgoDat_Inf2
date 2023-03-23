@@ -2,18 +2,17 @@ package de.eberln.algodat.distancefinders;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class FastLittleDistanceFinderImpl implements ILittleDistanceFinder{
+public class FastLittleDistanceFinderImpl<T extends Number> implements ILittleDistanceFinder<T>{
 	
 	@Override
-	public Point[] findNearestPair(Point[] p) {
+	public List<Point<T>> findNearestPair(List<Point<T>> points) {
 		
-		ArrayList<Point> points = new ArrayList<>();
-		Collections.addAll(points, p);
 		Collections.sort(points);
 		
 		double currentLowestDistance = Double.MAX_VALUE;
-		Point[] currentPoints = new Point[2];
+		List<Point<T>> currentLowestDistancePoints = new ArrayList<>();
 		
 		int comparePoint = 0;
 		
@@ -27,13 +26,19 @@ public class FastLittleDistanceFinderImpl implements ILittleDistanceFinder{
 			
 			while(comparePoint < points.size() && (points.get(comparePoint).getX() <= (points.get(i).getX() + currentLowestDistance))) {
 				
-				double currentViewedDistance = findDistance(points.get(i), points.get(comparePoint));
+				double currentViewedDistance = points.get(i).getDistance(points.get(comparePoint));
 				
 				if((currentViewedDistance < currentLowestDistance) && currentViewedDistance > 0) {
 					
 					currentLowestDistance = currentViewedDistance;
-					currentPoints[0] = points.get(i);
-					currentPoints[1] = points.get(comparePoint);
+					
+					try {
+						currentLowestDistancePoints.set(0, points.get(i));
+						currentLowestDistancePoints.set(1, points.get(comparePoint));
+					}catch(IndexOutOfBoundsException e) {
+						currentLowestDistancePoints.add(0, points.get(i));
+						currentLowestDistancePoints.add(1, points.get(comparePoint));
+					}
 				
 				}
 
@@ -43,12 +48,8 @@ public class FastLittleDistanceFinderImpl implements ILittleDistanceFinder{
 			
 		}
 		
-		return currentPoints;
+		return currentLowestDistancePoints;
 		
-	}
-	
-	private double findDistance(Point a, Point b) {
-		return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
 	}
 	
 }

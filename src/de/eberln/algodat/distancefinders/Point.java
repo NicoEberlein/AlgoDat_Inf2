@@ -1,42 +1,55 @@
 package de.eberln.algodat.distancefinders;
 
-public class Point implements Comparable<Point>{
+public class Point<T extends Number> implements Comparable<Point<T>>{
 
-	private int x;
-	private int y;
+	private T x;
+	private T y;
 	
-	public Point(int x, int y) {
+	public Point(T x, T y) {
 		
 		setX(x);
 		setY(y);
 		
 	}
 
-	public int getX() {
-		return x;
+	
+	public double getX() {
+		return x.doubleValue();
 	}
 
-	public void setX(int x) {
+
+	public void setX(T x) {
 		this.x = x;
 	}
 
-	public int getY() {
-		return y;
+
+	public double getY() {
+		return y.doubleValue();
 	}
 
-	public void setY(int y) {
+
+	public void setY(T y) {
 		this.y = y;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "(" + getX() + "/" + getY() + ")";
 	}
 
 	@Override
-	public int compareTo(Point o) {
+	public int compareTo(Point<T> o) {
 		
-		return getX() - o.getX();
+		return (int) Math.floor(this.getX() - o.getX());
+		
+	}
+	
+	public double getDistance(Point<T> o) {
+		
+		return Math.sqrt(
+				Math.pow(this.getX() - o.getX(), 2) +
+				Math.pow(this.getY() - o.getY(), 2));
 		
 	}
 	
