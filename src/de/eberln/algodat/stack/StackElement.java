@@ -15,12 +15,19 @@ public class StackElement<T> {
 		return content;
 	}
 	
-	public StackElement getNextElement() {
+	public StackElement<T> getNextElement() {
 		return nextElement;
 	}
 	
 	public void setNextElement(StackElement<T> element) {
 		this.nextElement = element;
+	}
+	
+	public void print() {
+		System.out.println(content);
+		if(nextElement != null) {
+			nextElement.print();
+		}
 	}
 	
 }

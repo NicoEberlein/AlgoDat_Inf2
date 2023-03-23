@@ -32,4 +32,8 @@ public class Stack<T> {
 		}
 	}
 	
+	public void print() {
+		topElement.print();
+	}
+	
 }
