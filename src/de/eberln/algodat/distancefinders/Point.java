@@ -41,7 +41,7 @@ public class Point<T extends Number> implements Comparable<Point<T>>{
 	@Override
 	public int compareTo(Point<T> o) {
 		
-		return (int) Math.floor(this.getX() - o.getX());
+		return Double.valueOf(this.getX()).compareTo(o.getX());
 		
 	}
 	
