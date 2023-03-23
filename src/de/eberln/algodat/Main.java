@@ -14,6 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int size = 1*100000;
+		int boundary = 10;
 		
 		ILittleDistanceFinder<Integer> fastFinder = new FastLittleDistanceFinderImpl<>();
 		ILittleDistanceFinder<Integer> slowFinder = new SlowLittleDistanceFinderImpl<>();
@@ -23,7 +24,7 @@ public class Main {
 		List<Point<Integer>> points = new ArrayList<>();
 		
 		for(int i = 0; i<size; i++) {
-			points.add(new Point<Integer>(r.nextInt(-1500, 1501), r.nextInt(-1500, 1501)));
+			points.add(new Point<Double>(r.nextDouble(boundary*(-1), boundary+1), r.nextDouble(boundary*(-1), boundary+1)));
 		}
 		
 		System.out.println("Fast:");
