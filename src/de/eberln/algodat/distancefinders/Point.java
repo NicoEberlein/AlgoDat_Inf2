@@ -5,13 +5,20 @@ public class Point<T extends Number> implements Comparable<Point<T>>{
 	private T x;
 	private T y;
 	
+	public static double getDistance(Point<? extends Number> a, Point<? extends Number> b) {
+		
+		return Math.sqrt(
+				Math.pow(a.getX() - b.getX(), 2) +
+				Math.pow(a.getY() - b.getY(), 2));
+		
+	}
+	
 	public Point(T x, T y) {
 		
 		setX(x);
 		setY(y);
 		
 	}
-
 	
 	public double getX() {
 		return x.doubleValue();
