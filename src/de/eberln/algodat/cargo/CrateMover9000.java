@@ -5,9 +5,7 @@ import de.eberln.algodat.stack.Stack;
 public class CrateMover9000 extends CrateMover {
 	
 	public CrateMover9000(String filePath) {
-		
 		super(filePath);
-		
 	}
 	
 	@Override
@@ -27,6 +25,7 @@ public class CrateMover9000 extends CrateMover {
 			}
 			
 		}
+		
 	}
 	
 }
