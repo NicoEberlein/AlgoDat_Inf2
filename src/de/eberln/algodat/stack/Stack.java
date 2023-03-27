@@ -1,39 +1,14 @@
 package de.eberln.algodat.stack;
 
-public class Stack<T> {
+public interface Stack<T> {
 
-	private StackElement<T> topElement;
+	public T push(T content);
 	
-	public Stack() {
-		
-	}
+	public T pop();
 	
-	public void push(T content) {
-		if(topElement == null) {
-			topElement = new StackElement<T>(content);
-		}else {
-			StackElement<T> newElement = new StackElement<T>(content);
-			newElement.setNextElement(topElement);
-			topElement = newElement;
-		}
-	}
+	public T peek();
 	
-	public T peek() {
-		return topElement.getContent();
-	}
+	public boolean isEmpty();
 	
-	public T pop() {
-		if(topElement == null) {
-			return null;
-		}else {
-			T tmp = topElement.getContent();
-			topElement = topElement.getNextElement();
-			return tmp;
-		}
-	}
-	
-	public void print() {
-		topElement.print();
-	}
-	
+	public void print();
 }
