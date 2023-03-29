@@ -9,7 +9,7 @@ import de.eberln.algodat.stack.Stack;
 
 public class SetupDataStructures {
     
-	public static ArrayList<Stack<String>> createStacks(ArrayList<String> stackSetupStr) {
+	public ArrayList<Stack<String>> createStacks(ArrayList<String> stackSetupStr) {
 		
 		ArrayList<Stack<String>> stacks = new ArrayList<>();
 		
@@ -40,7 +40,7 @@ public class SetupDataStructures {
 	
 	}
 	
-    public static ArrayList<Move> createMoves(ArrayList<String> moveSetupStr) {
+    public ArrayList<Move> createMoves(ArrayList<String> moveSetupStr) {
     
 		ArrayList<Move> moves = new ArrayList<>();
 		Pattern numberPattern = Pattern.compile("\\d+");

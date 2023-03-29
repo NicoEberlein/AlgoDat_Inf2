@@ -40,8 +40,10 @@ public abstract class CrateMover {
 				
 			}
 			
-			moves = SetupDataStructures.createMoves(stringMoves);
-			stacks = SetupDataStructures.createStacks(stringStacks);
+			SetupDataStructures setupClerk = new SetupDataStructures();
+			
+			moves = setupClerk.createMoves(stringMoves);
+			stacks = setupClerk.createStacks(stringStacks);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
