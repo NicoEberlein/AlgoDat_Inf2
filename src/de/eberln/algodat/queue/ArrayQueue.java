@@ -7,6 +7,7 @@ public class ArrayQueue<T> implements Queue<T>{
 	private int start;
 	private int end;
 	
+	@SuppressWarnings("unchecked")
 	public ArrayQueue(int initialSize) {
 		
 		queue = (T[]) new Object[initialSize];
