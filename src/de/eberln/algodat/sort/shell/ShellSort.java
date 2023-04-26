@@ -14,6 +14,7 @@ public class ShellSort<T extends Comparable<T>> extends Sortable<T> {
 	public T[] sort() {
 		
 		for(int i : sequenceAlgorithm.getSequence(array.length)) {
+			//System.out.println("Rufe " + sequenceAlgorithm.getClass().getSimpleName() + " mit " + i);
 			insertionSort(i);
 		}
 		
@@ -30,28 +31,18 @@ public class ShellSort<T extends Comparable<T>> extends Sortable<T> {
 		
 		for(int i = jump; i<array.length; i++) {
 			
-			if(array[i-jump].compareTo(array[i]) > 0) {
+			int smallerIndex = i - jump;
+
+			if(array[smallerIndex].compareTo(array[i]) > 0) {
 				
-				T tmp = array[i-jump];
-				array[i-jump] = array[i];
-				array[i] = tmp;
-				
-			}
-			
-		}
-	}
+				swapAtIndex(smallerIndex, i);
+
+				while(smallerIndex > 1 && array[smallerIndex].compareTo(array[smallerIndex-1]) < 0) {
+					swapAtIndex(smallerIndex, smallerIndex-1);
+					smallerIndex--;
+				}
 	
-	private void insertionSortNew(int jump) {
-		
-		for(int i = jump; i<array.length; i++) {
-			
-			int j = i;
-			T currentValue = array[i];
-			while((j>=jump) && (array[j-jump].compareTo(currentValue) > 0)) {
-				array[j] = array[j-jump];
-				j -= jump;
 			}
-			array[j] = currentValue;
 			
 		}
 	}
