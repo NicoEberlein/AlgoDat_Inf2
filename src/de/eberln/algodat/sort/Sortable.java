@@ -22,6 +22,19 @@ public abstract class Sortable<T extends Comparable<T>> {
 		s += "]";
 		return s;
 	}
+
+	public boolean isSorted() {
+
+		if(array.length <= 1) {
+			return true;
+		}
+
+		for(int i = 1; i<array.length; i++) {
+			if(array[i-1].compareTo(array[i]) > 0) return false;
+		}
+
+		return true;
+	}
 	
     public void dump(int lineLength)
     {
@@ -36,4 +49,12 @@ public abstract class Sortable<T extends Comparable<T>> {
         }
         System.out.println();
     }
+
+	protected void swapAtIndex(int i, int j) {
+
+		T tmp = array[i];
+		array[i] = array[j];
+		array[j] = tmp;
+
+	}
 }
