@@ -27,38 +27,27 @@ public class QuickSortHoare<T extends Comparable<T>> extends Sortable<T> {
         }
 
     }
-       
+
     private int partitionArray(int left, int right) {
 
         T pivot = array[left];
 
+        int leftMarker = left-1;
+        int rightMarker = right+1;
+
         while(true) {
 
-            while(array[left].compareTo(pivot) < 0) {
-                if(left == right) return left;
-                left++;
-            }
-            while(array[right].compareTo(pivot) > 0) {
-                if(left == right) return left;
-                right--;
-            }
+            do{leftMarker++;} while(array[leftMarker].compareTo(pivot) < 0);
+            do{rightMarker--;} while(array[rightMarker].compareTo(pivot) > 0);
 
-            if(left < right && array[left].compareTo(array[right]) != 0) {
-
-                T tmp = array[left];
-                array[left] = array[right];
-                array[right] = tmp;    
-
+            if(leftMarker < rightMarker) {
+                swapAtIndex(leftMarker, rightMarker);
             }else{
-                return left;
+                return rightMarker; 
             }
+
 
         }
-
     }
-
-
-    
-
     
 }
