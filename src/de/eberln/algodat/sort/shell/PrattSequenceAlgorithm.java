@@ -8,12 +8,11 @@ public class PrattSequenceAlgorithm implements SequenceAlgorithm{
 
 	@Override
 	public List<Integer> getSequence(int arraysize) {
-		
+
 		ArrayList<Integer> list = new ArrayList<>();
 		
 		int twoPow=0;
 		int value = (int) Math.pow(2, twoPow);
-		boolean abort = false;
 		
 		while(value < arraysize) {
 			
@@ -22,7 +21,6 @@ public class PrattSequenceAlgorithm implements SequenceAlgorithm{
 			for(int threePow = 1; threePow<=twoPow; threePow++) {
 				int innerValue = (int) (Math.pow(2, twoPow-threePow) * Math.pow(3, threePow));
 				if(innerValue > arraysize) {
-					abort = true;
 					break;
 				}else {
 					list.add(innerValue);
