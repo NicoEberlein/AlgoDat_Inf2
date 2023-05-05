@@ -1,7 +1,5 @@
 package de.eberln.algodat.sort.quick;
 
-import java.util.Arrays;
-
 import de.eberln.algodat.sort.Sortable;
 
 public class QuickSortDutchNationalFlag<T extends Comparable<T>> extends Sortable<T> {

@@ -28,13 +28,4 @@ public class BubbleSort<T extends Comparable<T>> extends Sortable<T> {
 		
 	}
 	
-	private void swapAtIndex(int i, int j) {
-		
-		T tmp = array[i];
-		array[i] = array[j];
-		array[j] = tmp;
-		
-	}
-	
-	
 }

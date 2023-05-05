@@ -17,9 +17,7 @@ public class InsertionSort<T extends Comparable<T>> extends Sortable<T>{
 				
 				if(array[j].compareTo(array[j-1]) < 0) {
 				
-					T tmp = array[j-1];
-					array[j-1] = array[j];
-					array[j] = tmp;
+					swapAtIndex(i, j);
 					
 				}else {
 					break;
