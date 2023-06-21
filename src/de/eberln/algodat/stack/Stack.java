@@ -10,5 +10,7 @@ public interface Stack<T> {
 	
 	public boolean isEmpty();
 	
+	public String toString();
+
 	public void print();
 }
