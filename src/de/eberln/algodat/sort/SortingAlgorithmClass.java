@@ -225,7 +225,7 @@ public class SortingAlgorithmClass {
                     innerSequence.add((int) Math.pow(2, i)-1);
                     i++;
                 }
-                yield innerSequence.stream().sorted().collect(Collectors.toList());
+                yield innerSequence.stream().sorted((i1, i2) -> Integer.compare(i2, i1)).collect(Collectors.toList());
             }
 
             case KNUTH -> {
@@ -235,7 +235,7 @@ public class SortingAlgorithmClass {
                     innerSequence.add((int) ((Math.pow(3, i)-1)/2));
                     i++;
                 }
-                yield innerSequence.stream().sorted().collect(Collectors.toList());
+                yield innerSequence.stream().sorted((i1, i2) -> Integer.compare(i2, i1)).collect(Collectors.toList());
             }
 
             case PRATT -> {
@@ -257,31 +257,78 @@ public class SortingAlgorithmClass {
                     pow3++;
                 }
 
-                yield tmpList.stream().sorted().collect(Collectors.toList());
+                yield tmpList.stream().sorted((i1, i2) -> Integer.compare(i2, i1)).collect(Collectors.toList());
             }
         };
 
-        System.out.println(sequence);
-
-        int[] arraySequence = new int[sequence.size()];
-
-        for(int i = 0; i<sequence.size(); i++) {
-            arraySequence[i] = sequence.get(i);
-        }
-
-        reverseSequence(arraySequence);
-
-        for(int i : arraySequence) {
+        for(int i : sequence) {
             insertionSortIterative(i);
         }
     }
-    
-    private void reverseSequence(int[] sequence) {
 
-        for(int i = 0; i<sequence.length/2; i++) {
-            sequence[i] = sequence[sequence.length-1-i];
+    public void mergeSort() {
+        int[] tmpMemory = new int[array.length];
+        mergeSortRecursive(0, array.length, tmpMemory);
+        array = tmpMemory;
+    }
+
+    private void mergeSortRecursive(int start, int end, int[] destMemory) {
+
+        if(end-start > 1) {
+         
+            int border = end - (end - start) / 2;
+
+            mergeSortRecursive(start, border, destMemory);
+            mergeSortRecursive(border, end, destMemory);
+
+            combine(start, end, destMemory);
+
         }
 
     }
 
+    private void combine(int start, int end, int[] destMemory) {
+
+        int border = end - (end - start) / 2;
+        int idx1 = start;
+        int idx2 = border;
+
+        int destIndex = start;
+
+        while(idx1 < border && idx2 < end) {
+
+            if(array[idx1] < array[idx2]) {
+                destMemory[destIndex++] = array[idx1++];
+            }else{
+                destMemory[destIndex++] = array[idx2++];
+            }
+
+        }
+
+        // Einer der beiden Stapel ist "leer"
+
+        if(idx1 < border) {
+
+            // Auf Stapel 1 ist noch was
+        
+            for(int i = idx1; i<border; i++) {
+                destMemory[destIndex++] = array[i];
+            }
+
+        }else if(idx2 < end) {
+
+            // Auf Stapel 2 ist noch was
+
+            for(int i = idx2; i<end; i++) {
+                destMemory[destIndex++] = array[i];
+            }
+        }
+
+        // Wichtig: Neue "Erkenntnis" über die sortierte Reihenfolge der kombinierten Teilarrays immer auch in Ursprungsarray schreiben
+
+        for(int i = start; i<end; i++) {
+            array[i] = destMemory[i];
+        }
+
+    }
 }
